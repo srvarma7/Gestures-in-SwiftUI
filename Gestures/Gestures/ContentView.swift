@@ -9,8 +9,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var darkMode: Bool = false
+    
     var body: some View {
-        Text("Hello, World!")
+        CardView(darkMode: darkMode)
+            .gesture(TapGesture(count: 1)
+                .onEnded({ () in
+                    withAnimation {
+                        self.darkMode.toggle()
+                    }
+                })
+            )
     }
 }
 
