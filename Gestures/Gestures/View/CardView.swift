@@ -20,7 +20,16 @@ struct CardView: View {
             Image("sai")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                
+                .scaleEffect(scaleSize)
+                .gesture(MagnificationGesture()
+                    .onChanged({ value in
+                        self.scaleSize = value.magnitude
+                    })
+                    .onEnded({ (value) in
+                        self.scaleSize = 1
+                    })
+                )
+            
             Text("Card")
                 .font(.title)
                 .fontWeight(.bold)
