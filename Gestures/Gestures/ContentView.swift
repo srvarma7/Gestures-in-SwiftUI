@@ -18,14 +18,25 @@ struct ContentView: View {
         CardView(darkMode: darkMode)
             .animation(.spring())
             .offset(y: self.cardDragState.height)
+            .rotationEffect(Angle(degrees: angle))
+            .gesture(RotationGesture()
+                .onChanged({ (angle) in
+                    self.angle = angle.degrees
+                })
+                .onEnded({_ in
+                    withAnimation(.default, {
+                        self.angle = 0
+                    })
+                })
+            )
             .gesture(DragGesture()
-                            .onChanged({ value in
-                                self.cardDragState = value.translation
-                            })
-                            .onEnded({ (value) in
-                                self.cardDragState = CGSize.zero
-                            })
-                        )
+                .onChanged({ value in
+                    self.cardDragState = value.translation
+                })
+                .onEnded({ (value) in
+                    self.cardDragState = CGSize.zero
+                })
+            )
             
             .gesture(TapGesture(count: 1)
                 .onEnded({ () in
