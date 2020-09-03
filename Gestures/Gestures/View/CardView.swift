@@ -11,16 +11,27 @@ import SwiftUI
 struct CardView: View {
     
     var darkMode: Bool = false
+    @State private var scaleSize: CGFloat = 1
     
     var body: some View {
         VStack {
+            Spacer()
+            
+            Image("sai")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                
             Text("Card")
                 .font(.title)
                 .fontWeight(.bold)
-                .foregroundColor(darkMode ? .white : .black)
+                .foregroundColor(darkMode ? .white : Color.black)
+                .padding(.bottom, 1)
+            
+            Spacer()
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 200)
-        .background(darkMode ? Color.black : Color.orange)
+        .background(darkMode ? Color.gray : Color.orange)
+        .cornerRadius(15)
     }
 }
 
